@@ -501,6 +501,9 @@ video {
 .top-5 {
   top: 1.25rem
 }
+.\!mb-0 {
+  margin-bottom: 0!important
+}
 .mb-1 {
   margin-bottom: .25rem
 }
@@ -1149,6 +1152,7 @@ body::after {
   gap: 1rem;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
   border-left: 2px solid var(--dark-300)
 }
 .tabs-vertical .tabs__title-button {
@@ -1160,7 +1164,8 @@ body::after {
   transition-timing-function: cubic-bezier(.4,0,.2,1);
   transition-duration: 150ms;
   display: inline-flex;
-  align-items: center
+  align-items: center;
+  text-align: left
 }
 .tabs-vertical .tabs__title-button:hover {
   color: var(--dark-700)
@@ -2048,9 +2053,6 @@ body::after {
   font-size: .85em;
   vertical-align: bottom
 }
-.benefits-cases__item.item-big {
-  grid-column: span 2/span 2
-}
 .benefits-cases__item .item__image {
   border-radius: 1.5rem
 }
@@ -2273,6 +2275,10 @@ body::after {
 .hero-section__desc {
   max-width: 33.75rem
 }
+.benefits-items .benefits-items__item {
+  border-radius: 1.5rem;
+  background-color: var(--brand-25)
+}
 .swiper {
   overflow: hidden
 }
@@ -2442,6 +2448,9 @@ body::after {
     gap: 3.25rem 1rem;
     grid-template-columns: repeat(2,1fr)
   }
+  .benefits-cases__item:nth-child(3n) {
+    grid-column: span 2/span 2
+  }
   .benefits-cases__item .item__image {
     margin-bottom: 1.5rem
   }
@@ -2484,6 +2493,14 @@ body::after {
   .hero-section__content {
     padding: 3rem 0
   }
+  .benefits-items__items {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1rem
+  }
+  .benefits-items .benefits-items__item {
+    padding: 1.5rem
+  }
 }
 @media (min-width:61.99875em) {
   .tabs-vertical .tabs__title {
@@ -2518,6 +2535,9 @@ body::after {
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap: 1rem
+  }
+  .benefits__list.list-four-columns {
+    grid-template-columns: repeat(4,1fr)
   }
   .benefits__item .item-benefit__header span {
     display: inline-block;
@@ -2720,7 +2740,7 @@ body::after {
     height: 9.375rem
   }
   .benefits-cases__item .item__image {
-    height: 28.125rem
+    height: 18.75rem
   }
   .product-info-thumb__slider .product-info-thumb__slide img {
     height: 6.25rem
@@ -2810,6 +2830,13 @@ body::after {
   }
   .tabs-vertical .tabs__title._tab-active .tabs__title-image {
     display: block
+  }
+  .tabs-vertical .tabs__title._tab-active .tabs__title-image img {
+    border-radius: 1.5rem;
+    -webkit-border-radius: 1.5rem;
+    -moz-border-radius: 1.5rem;
+    -ms-border-radius: 1.5rem;
+    -o-border-radius: 1.5rem
   }
   .tabs-vertical .tabs__content {
     display: none
@@ -2955,6 +2982,9 @@ body::after {
   .hero-section__content {
     padding: 1.5rem 0
   }
+  .benefits-items .benefits-items__item {
+    padding: 1rem
+  }
 }
 @media (max-width:47.99875em)and (any-hover:none) {
   .icon-menu {
@@ -3077,6 +3107,11 @@ body::after {
   .product-info__text .info-text-actions button {
     width: 100%
   }
+  .benefits-items__items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem
+  }
 }
 @media (max-width:47.99875em)and (min-width:87.8125em) {
   #map {
@@ -3132,7 +3167,7 @@ body::after {
     height: clamp(9.375rem ,5.5040322581rem + 19.3548387097vw ,22.5rem)
   }
   .benefits-cases__item .item__image {
-    height: clamp(28.125rem ,23.8853686636rem + 21.198156682vw ,42.5rem)
+    height: clamp(18.75rem ,11.7453917051rem + 35.0230414747vw ,42.5rem)
   }
   .product-info-thumb__slider .product-info-thumb__slide img {
     height: clamp(6.25rem ,5.3283410138rem + 4.6082949309vw ,9.375rem)
@@ -3157,6 +3192,11 @@ body::after {
 @media (max-width:47.99875em)and (min-width:29.99875em) {
   .cta-section__content {
     padding: 3rem
+  }
+  .benefits-items__items {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: .75rem
   }
 }
 @media (any-hover:hover) {

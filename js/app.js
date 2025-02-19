@@ -150,6 +150,11 @@
                 let spollerItems = spollersBlock.querySelectorAll("details");
                 if (spollerItems.length) spollerItems.forEach(((spollerItem, index) => {
                     let spollerTitle = spollerItem.querySelector("summary");
+                    let spollerButton = spollerTitle.querySelector("button");
+                    if (!spollerButton) {
+                        console.error("Ошибка: Внутри элемента data-tabs-title отсутствует кнопка");
+                        return;
+                    }
                     if (hideSpollerBody) {
                         spollerTitle.removeAttribute("tabindex");
                         if (index === 0) {
@@ -174,7 +179,7 @@
             }
             function setSpollerAction(e) {
                 const el = e.target;
-                if (el.closest("summary") && el.closest("[data-spollers]")) {
+                if (el.closest("summary") && el.closest("[data-spollers]") && el.tagName === "BUTTON") {
                     e.preventDefault();
                     if (el.closest("[data-spollers]").classList.contains("_spoller-init")) {
                         const spollerTitle = el.closest("summary");
@@ -4232,7 +4237,7 @@
                         spaceBetween: 16
                     },
                     768: {
-                        slidesPerView: 2.2,
+                        slidesPerView: 2.5,
                         spaceBetween: 24
                     }
                 }
