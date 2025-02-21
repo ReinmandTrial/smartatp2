@@ -150,11 +150,6 @@
                 let spollerItems = spollersBlock.querySelectorAll("details");
                 if (spollerItems.length) spollerItems.forEach(((spollerItem, index) => {
                     let spollerTitle = spollerItem.querySelector("summary");
-                    let spollerButton = spollerTitle.querySelector("button");
-                    if (!spollerButton) {
-                        console.error("Ошибка: Внутри элемента data-tabs-title отсутствует кнопка");
-                        return;
-                    }
                     if (hideSpollerBody) {
                         spollerTitle.removeAttribute("tabindex");
                         if (index === 0) {
@@ -179,7 +174,7 @@
             }
             function setSpollerAction(e) {
                 const el = e.target;
-                if (el.closest("summary") && el.closest("[data-spollers]") && el.tagName === "BUTTON") {
+                if (el.closest("summary") && el.closest("[data-spollers]")) {
                     e.preventDefault();
                     if (el.closest("[data-spollers]").classList.contains("_spoller-init")) {
                         const spollerTitle = el.closest("summary");
@@ -4201,104 +4196,127 @@
     }
     function initSliders() {
         if (document.querySelector(".swiper")) {
-            const slides = document.querySelectorAll(".partners-autoplay__slider .swiper-slide");
-            const autoplayEnabled = slides.length >= 7;
-            if (autoplayEnabled) new swiper_core_Swiper(".partners-autoplay__slider", {
-                modules: [ Autoplay ],
-                observer: true,
-                observeParents: true,
-                spaceBetween: 0,
-                centeredSlides: true,
-                speed: 1500,
-                autoplay: {
-                    delay: 0
-                },
-                loop: true,
-                slidesPerView: "auto",
-                allowTouchMove: false,
-                disableOnInteraction: true
-            });
-            new swiper_core_Swiper(".partners-reviews__slider", {
-                modules: [ Autoplay, Navigation ],
-                observer: true,
-                observeParents: true,
-                speed: 1500,
-                autoplay: {
-                    delay: 3e3
-                },
-                loop: true,
-                navigation: {
-                    nextEl: ".partners .swiper-button-next",
-                    prevEl: ".partners .swiper-button-prev"
-                },
-                breakpoints: {
-                    320: {
-                        slidesPerView: 1.2,
-                        spaceBetween: 16
-                    },
-                    768: {
-                        slidesPerView: 2.5,
-                        spaceBetween: 24
-                    }
-                }
-            });
-            new swiper_core_Swiper(".other-products__slider", {
-                modules: [ Autoplay, Navigation ],
-                observer: true,
-                observeParents: true,
-                speed: 1e3,
-                navigation: {
-                    nextEl: ".other-products .swiper-button-next",
-                    prevEl: ".other-products .swiper-button-prev"
-                },
-                breakpoints: {
-                    320: {
-                        slidesPerView: 1.2,
-                        spaceBetween: 16
-                    },
-                    768: {
-                        slidesPerView: 3,
-                        spaceBetween: 24
-                    }
-                }
-            });
-            const thumbSliderProduct = new swiper_core_Swiper(".product-info-thumb__slider", {
-                modules: [ Autoplay, Navigation, Thumb ],
-                observer: true,
-                observeParents: true,
-                speed: 1e3,
-                breakpoints: {
-                    320: {
-                        slidesPerView: 2,
-                        spaceBetween: 4
-                    },
-                    768: {
-                        slidesPerView: 3,
-                        spaceBetween: 8
-                    }
-                }
-            });
-            new swiper_core_Swiper(".product-info__slider", {
-                modules: [ Autoplay, Navigation, Thumb ],
-                observer: true,
-                observeParents: true,
-                speed: 1e3,
-                slidesPerView: 1,
-                spaceBetween: 16,
-                autoplay: {
-                    delay: 1e4
-                },
-                navigation: {
-                    nextEl: ".product-info .swiper-button-next",
-                    prevEl: ".product-info .swiper-button-prev"
-                },
-                thumbs: {
-                    swiper: thumbSliderProduct
-                }
-            });
+                new swiper_core_Swiper(".partners-autoplay__slider", {
+                        modules: [ Autoplay ],
+                        observer: true,
+                        observeParents: true,
+                        spaceBetween: 0,
+                        centeredSlides: true,
+                        speed: 1500,
+                        centeredSlides: true,
+                        autoplay: {
+                                delay: 0
+                        },
+                        spaceBetween: 50,
+                        loop: true,
+                        slidesPerView: "auto",
+                        allowTouchMove: false,
+                        disableOnInteraction: true,
+                        breakpoints: {
+                                1024: {
+                                        autoplay: false
+                                }
+                        },
+                        on: {
+                            resize: function(swiper) {
+                                swiper.update()
+                            }
+                        }
+                });
+                new swiper_core_Swiper(".partners-reviews__slider", {
+                        modules: [ Autoplay, Navigation ],
+                        observer: true,
+                        observeParents: true,
+                        speed: 1500,
+                        autoplay: {
+                                delay: 3e3
+                        },
+                        loop: true,
+                        navigation: {
+                                nextEl: ".partners .swiper-button-next",
+                                prevEl: ".partners .swiper-button-prev"
+                        },
+                        breakpoints: {
+                                320: {
+                                        slidesPerView: 1.2,
+                                        spaceBetween: 16
+                                },
+                                768: {
+                                        slidesPerView: 2.2,
+                                        spaceBetween: 24
+                                }
+                        }
+                });
+                new swiper_core_Swiper(".other-products__slider", {
+                        modules: [ Autoplay, Navigation ],
+                        observer: true,
+                        observeParents: true,
+                        speed: 1e3,
+                        navigation: {
+                                nextEl: ".other-products .swiper-button-next",
+                                prevEl: ".other-products .swiper-button-prev"
+                        },
+                        breakpoints: {
+                                320: {
+                                        slidesPerView: 1.2,
+                                        spaceBetween: 16
+                                },
+                                768: {
+                                        slidesPerView: 3,
+                                        spaceBetween: 24
+                                }
+                        }
+                });
+                const thumbSliderProduct = new swiper_core_Swiper(".product-info-thumb__slider", {
+                        modules: [ Autoplay, Navigation, Thumb ],
+                        observer: true,
+                        observeParents: true,
+                        speed: 1e3,
+                        breakpoints: {
+                                320: {
+                                        slidesPerView: 2,
+                                        spaceBetween: 4
+                                },
+                                768: {
+                                        slidesPerView: 3,
+                                        spaceBetween: 8
+                                }
+                        }
+                });
+                new swiper_core_Swiper(".product-info__slider", {
+                        modules: [ Autoplay, Navigation, Thumb ],
+                        observer: true,
+                        observeParents: true,
+                        speed: 1e3,
+                        slidesPerView: 1,
+                        spaceBetween: 16,
+                        autoplay: {
+                                delay: 1e4
+                        },
+                        navigation: {
+                                nextEl: ".product-info .swiper-button-next",
+                                prevEl: ".product-info .swiper-button-prev"
+                        },
+                        thumbs: {
+                                swiper: thumbSliderProduct
+                        }
+                });
         }
     }
     window.addEventListener("load", (function(e) {
+        if(window.innerWidth <= 1024) {
+                const clientSlides = document.querySelectorAll('.partners-autoplay__slide')
+                const clientSlidesWrapper = document.querySelector('.partners-autoplay__wrapper')
+                if(clientSlides.length < 15 && clientSlides.length !== 0) {
+                        for(let i = 0; i < Math.round(15 /clientSlides.length); i++) {
+                                clientSlides.forEach(slide => {
+                                        let newSlide = slide.cloneNode(true);
+                                        clientSlidesWrapper.appendChild(newSlide)
+                                });
+                        }
+                }
+        }
+    
         initSliders();
     }));
     let addWindowScrollEvent = false;
