@@ -361,3 +361,7 @@ form.submitting .wpcf7-spinner {
   -o-object-fit: cover;
   object-fit: cover
 }
+
+.benefits .benefits-tabs__image img {
+  max-height: 900px;
+}

@@ -49,8 +49,8 @@ function rfware_setup()
 	register_nav_menus(
 		array(
 			'header_menu' => 'Header Menu',
-			'about_us_menu' => 'About us menu',
-			'customer_service_menu' => 'Customer service menu',
+			'company_menu' => 'Company menu',
+			'help_menu' => 'Help menu',
 		)
 	);
 
@@ -90,7 +90,10 @@ function rfware_setup()
 	);
 }
 add_action('after_setup_theme', 'rfware_setup');
-
+@ini_set( 'upload_max_size' , '256M' );
+@ini_set( 'post_max_size', '256M');
+@ini_set( 'max_execution_time', '300' );
+@ini_set( 'max_input_time', '300' );
 
 /**
  * Customizes the HTML output of the WordPress custom logo.

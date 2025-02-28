@@ -79,6 +79,8 @@ $how_it_works_subtitle = $how_it_works_header['subtitle'];
 $why_rfware_header = get_field('why_rfware_header');
 $why_rfware_title = $why_rfware_header['title'];
 $why_rfware_subtitle = $why_rfware_header['subtitle'];
+
+
 ?>
 <main class="page-section">
 
@@ -113,6 +115,7 @@ $why_rfware_subtitle = $why_rfware_header['subtitle'];
 			</section>
 			<!-- /.jumbotron -->
 	<div class="jumpscroll"></div>
+
 	<section class="benefits lg:lg:py-20 md:py-16 py-10">
 		<div class="benefits__container">
 			<div class="benefits__content">
@@ -125,56 +128,62 @@ $why_rfware_subtitle = $why_rfware_header['subtitle'];
 					</div>
 				</div>
 				<div class="benefits__body">
-					<div class="benefits__list">
-						<?php
-						$benefits_card = get_field('benefits_group');
-						if (!empty($benefits_card)) {
-							$i = 0;
-							foreach ($benefits_card as $item) {
-								$i++;
-
-								$title = !empty($item['title']) ? $item['title'] : '';
-								$subtitle = !empty($item['subtitle']) ? $item['subtitle'] : '';
-								$image = !empty($item['img']) ? $item['img'] : '';
-
-						?>
-								<div class="benefits__item item-benefit">
-									<div class="item-benefit__body">
-										<div class="item-benefit__header">
-											<span class="headline-medium text-dark-600"><?= sprintf('%02d', $i) ?></span>
-											<div class="item-benefit__icon">
-												<img src="<?= esc_url($image['url']) ?>" alt="<?= esc_attr($image['alt']) ?>">
-											</div>
+					<div data-tabs class="benefits-tabs tabs tabs-vertical">
+						<nav data-tabs-titles class="tabs__navigation">
+							<?php
+							$benefits_card = get_field('benefits_group');
+							if (!empty($benefits_card)) {
+								$i = 0;
+								foreach ($benefits_card as $item) {
+									$i++;
+									$title = !empty($item['title']) ? $item['title'] : '';
+									$subtitle = !empty($item['subtitle']) ? $item['subtitle'] : '';
+									$image = !empty($item['img']) ? $item['img'] : '';
+									$active_class = $i === 1 ? '_tab-active' : '';
+							?>
+									<div class="tabs__title <?= $active_class ?>">
+										<button type="button" class="tabs__title-button">
+											<?= esc_html($title) ?>
+										</button>
+										<div class="tabs__title-content body-large text-dark-400">
+											<p><?= esc_html($subtitle) ?></p>
 										</div>
-										<div class="item-benefit__content">
-											<div class="item-benefit__text">
-												<h5 class="headline-medium text-dark-800 mb-4">
-													<?= $title ?>
-												</h5>
-												<div class="body-medium text-dark-600">
-													<p>
-														<?= $subtitle ?>
-													</p>
-												</div>
-											</div>
-											<div class="item-benefit__icon--pc">
+										<div class="tabs__title-image">
+											<?php if (!empty($image)) : ?>
 												<img src="<?= esc_url($image['url']) ?>" alt="<?= esc_attr($image['alt']) ?>">
-											</div>
+											<?php endif; ?>
 										</div>
 									</div>
-								</div>
-						<?php
-
+							<?php
+								}
 							}
-						}
-						?>
+							?>
+						</nav>
+						<div data-tabs-body class="tabs__content">
+							<?php
+							if (!empty($benefits_card)) {
+								foreach ($benefits_card as $item) {
+									$image = !empty($item['img']) ? $item['img'] : '';
+							?>
+									<div class="tabs__body">
+										<div class="benefits-tabs__image">
+											<?php if (!empty($image)) : ?>
+												<img src="<?= esc_url($image['url']) ?>" alt="<?= esc_attr($image['alt']) ?>">
+											<?php endif; ?>
+										</div>
+									</div>
+							<?php
+								}
+							}
+							?>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- /.benefits -->
-	<section class="how-it-works lg:lg:py-20 md:py-16 py-10">
+	<!-- <section class="how-it-works lg:lg:py-20 md:py-16 py-10">
 		<div class="how-it-works__container">
 			<div class="how-it-works__content">
 				<div class="how-it-works__heading section-heading flex items-start gap-4 justify-between lg:mb-0">
@@ -213,7 +222,7 @@ $why_rfware_subtitle = $why_rfware_header['subtitle'];
 			</div>
 		</div>
 		</div>
-	</section>
+	</section> -->
 	<!-- /.how-it-works -->
 
 	<section class="promo-video lg:py-20 md:py-16 py-10">
@@ -269,55 +278,46 @@ $why_rfware_subtitle = $why_rfware_header['subtitle'];
 					</div>
 				</div>
 				<div class="why-us__body">
-					<div data-tabs class="tabs tabs-vertical">
-						<nav data-tabs-titles class="tabs__navigation">
-							<?php
-							$why_us = get_field('why_rfware_group');
-							$img_arr = [];
-							if (!empty($why_us)) {
-								$i = 0;
-								foreach ($why_us as $item) {
-									$i++;
-									$is_active = $i > 1 ? '' : '_tab-active';
-
-									$title = $item['title'];
-									$subtitle = $item['subtitle'];
-									$image = $item['img'];
-
-									array_push($img_arr, [
-										'url' => $image['url'],
-										'alt' => $image['alt'],
-									])
-							?>
-									<div class="tabs__title <?= $is_active ?>">
-										<button type="button" class="tabs__title-button"><?= $title ?></button>
-										<div class="tabs__title-content body-large text-dark-400">
-											<p>
-												<?= $subtitle ?>
-											</p>
+					<div class="benefits__list">
+						<?php
+						$why_us = get_field('why_rfware_group');
+						if (!empty($why_us)) {
+							$i = 0;
+							foreach ($why_us as $item) {
+								$i++;
+								$title = $item['title'];
+								$subtitle = $item['subtitle'];
+								$image = $item['img'];
+						?>
+								<div class="benefits__item item-benefit">
+									<div class="item-benefit__body">
+										<div class="item-benefit__header">
+											<span class="headline-medium text-dark-600">0<?= $i ?></span>
+											<div class="item-benefit__icon">
+												<img src="<?= $image['url'] ?>" alt="<?= $image['alt'] ?>">
+											</div>
 										</div>
-										<div class="tabs__title-image">
-											<img src="<?= $image['url'] ?>" alt="<?= $image['alt'] ?>">
-										</div>
-									</div>
-								<?php	} ?>
-							<?php } ?>
-						</nav>
-						<div data-tabs-body class="tabs__content">
-							<?php
-							if (!empty($img_arr)) {
-								foreach ($img_arr as $image) {
-							?>
-									<div class="tabs__body">
-										<div class="why-us-tabs__image">
-											<img src="<?= $image['url'] ?>" alt="<?= $image['alt'] ?>">
+										<div class="item-benefit__content">
+											<div class="item-benefit__text">
+												<h5 class="headline-medium text-dark-800 mb-4">
+													<?= $title ?>
+												</h5>
+												<div class="body-medium text-dark-600">
+													<p>
+														<?= $subtitle ?>
+													</p>
+												</div>
+											</div>
+											<div class="item-benefit__icon--pc">
+												<img src="<?= $image['url'] ?>" alt="<?= $image['alt'] ?>">
+											</div>
 										</div>
 									</div>
-							<?php
-								}
+								</div>
+						<?php
 							}
-							?>
-						</div>
+						}
+						?>
 					</div>
 				</div>
 			</div>
@@ -326,7 +326,7 @@ $why_rfware_subtitle = $why_rfware_header['subtitle'];
 	<!-- /.why-us -->
 
 
-	<section class="partners lg:py-20 md:py-16 py-10 !hidden">
+	<section class="partners lg:py-20 md:py-16 py-10">
 		<div class="partners__container">
 			<div class="partners__content">
 				<div class="partners__heading mb-8">

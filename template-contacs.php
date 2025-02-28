@@ -94,7 +94,7 @@ $contacts_subtitle = get_field('contacts_subtitle');
 		</div>
 	</section>
 	<!-- /.contacts-form -->
-	<section class="map-section lg:py-20 md:py-16 py-10">
+	<!-- <section class="map-section lg:py-20 md:py-16 py-10">
 		<div class="map-section__container">
 			<div class="map-section__content">
 				<div class="grid lg:grid-cols-2 gap-4">
@@ -139,11 +139,9 @@ $contacts_subtitle = get_field('contacts_subtitle');
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 	<!-- /.map-section -->
-	<?php get_template_part('template-parts/cta', 'request-demo') ?>
+	<?php get_template_part('template-parts/cta') ?>
 	<!-- /.cta-section -->
-	<?php get_template_part('template-parts/questions') ?>
-	<!-- /.faq -->
 </main>
 <?php get_footer() ?>
